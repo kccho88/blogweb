@@ -1,0 +1,380 @@
+/* Sora 2 프롬프트 생성기 커스텀 스타일 */
+
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(147, 51, 234, 0.6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(147, 51, 234, 0.8);
+}
+
+/* 폼 요소 스타일링 */
+input, textarea, select {
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+/* 버튼 호버 효과 */
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* JSON 미리보기 스타일링 */
+#jsonPreview {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+#jsonPreview .json-key {
+    color: #93c5fd;
+}
+
+#jsonPreview .json-string {
+    color: #86efac;
+}
+
+#jsonPreview .json-number {
+    color: #fbbf24;
+}
+
+#jsonPreview .json-boolean {
+    color: #f472b6;
+}
+
+#jsonPreview .json-null {
+    color: #9ca3af;
+}
+
+/* 애니메이션 */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 성공 메시지 */
+.success-message {
+    background: linear-gradient(90deg, #10b981, #059669);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideIn 0.3s ease-out;
+}
+
+/* 로딩 스피너 */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .max-w-7xl {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+    
+    .py-8 {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+}
+
+/* 폼 유효성 검사 스타일 */
+.input-error {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.3) !important;
+}
+
+.input-success {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 프롬프트 텍스트 스타일 */
+.prompt-text {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+/* 🆕 품질 점수 스타일 */
+.quality-score {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(59, 130, 246, 0.2));
+    border: 1px solid rgba(147, 51, 234, 0.3);
+}
+
+.score-bar-s { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+.score-bar-a { background: linear-gradient(90deg, #10b981, #059669); }
+.score-bar-b { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+.score-bar-c { background: linear-gradient(90deg, #f97316, #ea580c); }
+.score-bar-d { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+/* 🆕 모달 애니메이션 */
+.modal-enter {
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 🆕 저장된 프롬프트 카드 스타일 */
+.saved-prompt-card {
+    transition: all 0.3s ease;
+    border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+.saved-prompt-card:hover {
+    border-color: rgba(147, 51, 234, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* 🆕 품질 배지 스타일 */
+.quality-badge-s { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+.quality-badge-a { background: linear-gradient(90deg, #10b981, #059669); }
+.quality-badge-b { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+.quality-badge-c { background: linear-gradient(90deg, #f97316, #ea580c); }
+.quality-badge-d { background: linear-gradient(90deg, #ef4444, #dc2626); }
+
+/* 🆕 내보내기 버튼 효과 */
+.export-button {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    transition: all 0.3s ease;
+}
+
+.export-button:hover {
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+}
+
+/* 🆕 프로그레스 바 애니메이션 */
+.progress-bar {
+    transition: width 0.8s ease-in-out;
+}
+
+/* 🆕 향상된 스타일 그룹 */
+optgroup {
+    font-weight: 600;
+    color: #9ca3af;
+    background: rgba(17, 24, 39, 0.9);
+}
+
+optgroup option {
+    font-weight: 400;
+    color: #e5e7eb;
+    padding-left: 10px;
+}
+
+/* 🆕 Select 옵션 텍스트 가시성 개선 */
+select option {
+    color: #1f2937 !important;
+    background-color: #f9fafb !important;
+    font-weight: 500;
+    padding: 8px 12px;
+}
+
+select option:checked,
+select option:hover {
+    background-color: #e5e7eb !important;
+    color: #111827 !important;
+}
+
+/* 모든 Select 요소에 대한 기본 스타일 강화 */
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* 특정 select들의 옵션 텍스트 보장 */
+#cameraMovement option,
+#cameraAngle option,
+#videoLength option,
+#videoFormat option,
+#overallStyle option {
+    color: #1f2937 !important;
+    background-color: #ffffff !important;
+    font-weight: 500 !important;
+    padding: 10px 15px !important;
+}
+
+/* 🆕 토스트 메시지 개선 */
+.toast-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-left: 4px solid #047857;
+}
+
+.toast-error {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border-left: 4px solid #b91c1c;
+}
+
+.toast-info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    border-left: 4px solid #1d4ed8;
+}
+
+/* 🆕 Gemini AI 관련 스타일 */
+.gemini-button {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    transition: all 0.3s ease;
+}
+
+.gemini-button:hover {
+    background: linear-gradient(135deg, #ea580c, #dc2626);
+    box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    transform: translateY(-1px);
+}
+
+.gemini-result-section {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.1), rgba(220, 38, 38, 0.1));
+    border: 1px solid rgba(249, 115, 22, 0.3);
+}
+
+.gemini-analysis {
+    background: rgba(31, 41, 55, 0.5);
+    border: 1px solid rgba(107, 114, 128, 0.3);
+}
+
+/* 🆕 Gemini 로딩 애니메이션 */
+.gemini-loading {
+    animation: geminiPulse 2s ease-in-out infinite;
+}
+
+@keyframes geminiPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+    }
+}
+
+/* 🆕 API 키 입력 필드 보안 스타일 */
+#geminiApiKey {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+#geminiApiKey::placeholder {
+    letter-spacing: normal;
+}
+
+/* 🆕 Gemini 결과 하이라이트 */
+.gemini-highlight {
+    animation: geminiGlow 0.5s ease-in-out;
+}
+
+@keyframes geminiGlow {
+    0% {
+        background-color: rgba(249, 115, 22, 0.2);
+    }
+    100% {
+        background-color: transparent;
+    }
+}
